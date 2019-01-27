@@ -28,3 +28,5 @@ Route.group(() => {
   .prefix('account')
   .middleware(['auth:jwt'])
 Route.put('/change_password', 'UserController.changePassword')
+//This route takes a username as the route parameter. This makes the route dynamic as different usernames can be passed to it. 
+Route.get(':username', 'UserController.showProfile')
