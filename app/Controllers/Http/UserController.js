@@ -21,7 +21,26 @@ class UserController {
                 message: 'There was a problem creating the user, plese try again'
             })
         }
-    }        
+    }
+    
+    async login ({request, auth, response}){
+        try{
+            //validate the user credentials and generate a JWT Token
+            const tokern = await auth.attempt(
+                request.input('email'),
+                request.input('password')    
+            )
+            return response.json({
+                status: 'success',
+                data: token
+            })
+        } catch(error) {
+            return response.status(400).json({
+                status: 'error',
+                message: 'Invalid email / password'
+            })
+        }
+    }
 }
 //add to the top of the file
 
