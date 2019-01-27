@@ -4,6 +4,9 @@
 const Model = use('Model')
 
 class Tweet extends Model {
+    user(){
+        return this.belongsTo('app/Models/User')
+    }
     replies(){
         return this.hasMany('App/Models/Reply')
     }
