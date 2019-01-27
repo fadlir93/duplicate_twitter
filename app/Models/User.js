@@ -45,6 +45,12 @@ class User extends Model {
       'user_id'
     ).pivotTable('followers')
   }
+  replies(){
+    return this.hasMany('App/Models/Reply')
+  }
+  favorites(){
+    return this.hasMany('App/Models/Favorite')
+  }
 }
 
 module.exports = User
