@@ -171,6 +171,18 @@ class UserController {
             data: usersToFollow
         })
     }
+    async follow({ request, auth, response}){
+        //get currently authenticated user
+        const user = auth.current.user
+
+        //add to user's followers
+        await user.following().attach(request.input('user_id'))
+
+        return response.json({
+            status: 'success',
+            data: null
+        })
+    }
 }
 //add to the top of the file
 
