@@ -153,6 +153,24 @@ class UserController {
             })
         }
     }
+    async usersToFollow ({params, auth, response}){
+        //get currently authenticated user
+        const user = auth.current.user
+        
+        //get the ID's of users the currently authenticated user is already following
+        const usersAlreadyFollowing = await user.following().ids()
+        
+        //fetch users the currently authenticated user is not already following
+        const usersToFollow = await User.query()
+            .whereNot('id', user.id)
+            .whereNotIn('id', usersAlreadyFollowing)
+            .pick(3)
+
+        return response.json({
+            status: 'success',
+            data: usersToFollow
+        })
+    }
 }
 //add to the top of the file
 
