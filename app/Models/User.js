@@ -31,8 +31,19 @@ class User extends Model {
    *
    * @return {Object}
    */
-  tokens () {
-    return this.hasMany('App/Models/Token')
+  followers(){
+    return this.belongsToMany(
+        'App/Models/User',
+        'user_id',
+        'follower_id'  
+    ).pivotTable('followers')
+  }
+  following(){
+    return this.belongsToMany(
+      'App/Models/User',
+      'follower_id',
+      'user_id'
+    ).pivotTable('followers')
   }
 }
 
