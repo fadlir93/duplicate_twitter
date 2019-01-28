@@ -1,6 +1,7 @@
 'use strict'
 
-const Tweet = user('App/Models/Tweet')
+const Tweet = use('App/Models/Tweet')
+const Reply = use('App/Models/Reply')
 class TweetController {
     async tweet ({ request, auth, response}) {
         // get currently authenticated user
@@ -42,6 +43,29 @@ class TweetController {
                 message: 'Tweet Not Found'       
             })
         }
+    }
+    async reply({request, auth, params, response}) {
+        //get currently authenticated user
+        const user = auth.current.user
+
+        //get tweet with the specified ID
+        const tweet = await Tweet.find(params.id)
+
+        //persist to database
+        const reply = await Reply.create({
+            user_id: user.id,
+            tweet_id: tweet.id,
+            reply: request.input('reply')
+        })
+
+        //fetch user that made the reply
+        await reply.load('user')
+
+        return response.json({
+            status: 'success',
+            message: 'reply posted !',
+            data: reply
+        })
     }
 
 }
