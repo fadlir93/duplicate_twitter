@@ -21,6 +21,29 @@ class TweetController {
             data: tweet
         })
     }
+
+    async show ({ params, response}) {
+        try {
+            const tweet = await Tweet.query()
+                .where('id', params.id)
+                .with('user')
+                .with('replies')
+                .with('replies.user')
+                .with('favorites')
+                .firstOrFail()
+
+            return response.json({
+                status: 'success',
+                data: tweet
+            })
+        } catch (error) {
+            return response.status(404).json({
+                status: 'error',
+                message: 'Tweet Not Found'       
+            })
+        }
+    }
+
 }
 
 module.exports = TweetController

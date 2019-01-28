@@ -39,3 +39,4 @@ Route.group(() => {
 Route.delete('/unfollow/:id', 'UsersController.unFollow')
 Route.get('/timeline', 'UserController.timeline')
 Route.post('/tweet', 'TweetController.tweet').middleware(['auth:jwt'])
+Router.get('/tweets/:id', 'TweetController.show')
