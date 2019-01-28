@@ -183,6 +183,18 @@ class UserController {
             data: null
         })
     }
+    async unFollow({ params, auth, response}) {
+        //get currently authenticated user
+        const user = auth.current.user
+
+        //remove from user's followers
+        await user.following().detach(params.id)
+
+        return response.json({
+            status: 'success',
+            data: null
+        })
+    }
 }
 //add to the top of the file
 

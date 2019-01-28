@@ -35,3 +35,5 @@ Route.group(() => {
 })
   .prefix('users')
   .middleware(['auth:jwt'])
+//unfollow user
+Route.delete('/unfollow/:id', 'UsersController.unFollow')
