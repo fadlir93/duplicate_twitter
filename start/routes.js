@@ -37,3 +37,4 @@ Route.group(() => {
   .middleware(['auth:jwt'])
 //unfollow user
 Route.delete('/unfollow/:id', 'UsersController.unFollow')
+Route.get('/timeline', 'UserController.timeline')
