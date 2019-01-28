@@ -46,3 +46,4 @@ Route.group(() => {
 })
   .prefix('favorites')
   .middleware(['auth:jwt'])
+Route.delete('/destroy/:id', 'FavoriteController.unFavorite');
