@@ -9,7 +9,7 @@ import VeeValidate from 'vee-validate'
 window.axios = axios
 axios.defaults.baseURL = 'http://127.0.0.1:3333'
 Vue.config.productionTip = false
-//register vee validate plugin
+// register vee validate plugin
 Vue.use(VeeValidate)
 
 /* eslint-disable no-new */

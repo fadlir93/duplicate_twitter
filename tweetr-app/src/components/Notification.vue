@@ -5,7 +5,8 @@
 </template>
 
 <script>
-    export default {
+/* eslint-disable */ 
+export default {
         name: 'Notification',
         props: {
             message: {
